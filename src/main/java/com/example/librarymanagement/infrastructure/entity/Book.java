@@ -1,10 +1,14 @@
 package com.example.librarymanagement.infrastructure.entity;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,12 +30,21 @@ public class Book {
 	@Column(name="title", nullable=false)
 	private String title;
 	
-	@Column(name="author", nullable=false)
-	private String author;
+	@ManyToOne
+	@JoinColumn(name="author", nullable=false)
+	private Author author;
 	
-	@Column(name="publisher", nullable=false)
-	public String publisher;
+	@ManyToOne
+	@JoinColumn(name="publisher", nullable=false)
+	private Publisher publisher;
 	
 	@Column(name="age_restriction", nullable=false)
-	public Integer ageRestriction;
+	private Integer ageRestriction;
+	
+	@ManyToOne
+	@JoinColumn(name="session", nullable=false)
+	private Session session;
+	
+	@Column(name="release_date", nullable=false)
+	private LocalDate releaseDate;
 }

@@ -40,8 +40,8 @@ public class BookController {
 		return ResponseEntity.ok(service.getBookById(id));
 	}
 	
-	@PutMapping
-	public ResponseEntity<Book> editBook(@RequestParam Long id, @RequestBody Book body){
+	@PutMapping("/{id}")
+	public ResponseEntity<Book> editBook(@PathVariable Long id, @RequestBody Book body){
 		return ResponseEntity.ok(service.updateBookById(id, body));
 	}
 	

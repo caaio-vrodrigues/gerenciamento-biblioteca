@@ -15,8 +15,17 @@ import lombok.RequiredArgsConstructor;
 public class BookService {
 	
 	private final BookRepository repo;
+	private final SessionService sessionService;
+	private final AuthorService authorService;
+	private final PublisherService publisherService;
 	
 	public Book createBook(@RequestBody Book body) {
+		body.setSession(sessionService.getSessionById(body
+			.getSession().getId()));
+		body.setAuthor(authorService.getAuthorById(body
+			.getAuthor().getId()));
+		body.setPublisher(publisherService.getPublisherById(body
+			.getPublisher().getId()));
 		return repo.saveAndFlush(body);
 	}
 	
@@ -34,12 +43,14 @@ public class BookService {
 		body.setId(book.getId());
 		body.setTitle(body.getTitle() != null ?
 			body.getTitle() : book.getTitle());
-		body.setAuthor(body.getAuthor() != null ?
-			body.getAuthor() : book.getAuthor());
-		body.setPublisher(body.getPublisher() != null ?
-			body.getPublisher() : book.getPublisher());
+		body.setAuthor(authorService.getAuthorById(body.getAuthor() != null ? 
+			body.getAuthor().getId() : book.getAuthor().getId()));
+		body.setPublisher(publisherService.getPublisherById(body.getPublisher() != null ?
+			body.getPublisher().getId() : book.getAuthor().getId()));
 		body.setAgeRestriction(body.getAgeRestriction() != null ?
 			body.getAgeRestriction() : book.getAgeRestriction());
+		body.setSession(sessionService.getSessionById(body.getSession() != null ?
+			body.getSession().getId() : book.getSession().getId()));
 		return repo.saveAndFlush(body);
 	}
 	
