@@ -43,14 +43,17 @@ public class BookService {
 		body.setId(book.getId());
 		body.setTitle(body.getTitle() != null ?
 			body.getTitle() : book.getTitle());
-		body.setAuthor(authorService.getAuthorById(body.getAuthor() != null ? 
-			body.getAuthor().getId() : book.getAuthor().getId()));
-		body.setPublisher(publisherService.getPublisherById(body.getPublisher() != null ?
-			body.getPublisher().getId() : book.getAuthor().getId()));
 		body.setAgeRestriction(body.getAgeRestriction() != null ?
 			body.getAgeRestriction() : book.getAgeRestriction());
-		body.setSession(sessionService.getSessionById(body.getSession() != null ?
-			body.getSession().getId() : book.getSession().getId()));
+		body.setAuthor(authorService
+			.getAuthorById(body.getAuthor() != null ?
+				body.getAuthor().getId() : book.getAuthor().getId()));
+		body.setPublisher(publisherService
+			.getPublisherById(body.getPublisher() != null ?
+				body.getPublisher().getId() : book.getAuthor().getId()));
+		body.setSession(sessionService
+			.getSessionById(body.getSession() != null ?
+				body.getSession().getId() : book.getSession().getId()));
 		return repo.saveAndFlush(body);
 	}
 	

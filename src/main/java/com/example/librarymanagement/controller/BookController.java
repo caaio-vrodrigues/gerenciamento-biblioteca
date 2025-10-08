@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.librarymanagement.infrastructure.entity.Book;
@@ -41,7 +40,10 @@ public class BookController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Book> editBook(@PathVariable Long id, @RequestBody Book body){
+	public ResponseEntity<Book> editBook(
+		@PathVariable Long id, 
+		@RequestBody Book body
+	){
 		return ResponseEntity.ok(service.updateBookById(id, body));
 	}
 	

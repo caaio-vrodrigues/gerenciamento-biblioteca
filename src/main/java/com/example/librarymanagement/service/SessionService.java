@@ -31,7 +31,8 @@ public class SessionService {
 	public Session updateSession(Long id, Session body) {
 		Session session = getSessionById(id);
 		body.setId(session.getId());
-		body.setGender(body.getGender() != null ? body.getGender() : session.getGender());
+		body.setGender(body.getGender() != null ? 
+			body.getGender() : session.getGender());
 		return repo.saveAndFlush(body);
 	}
 	
